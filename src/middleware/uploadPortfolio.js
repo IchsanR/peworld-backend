@@ -7,7 +7,7 @@ const path = require("path");
 const multerUpload = multer({
 	storage: multer.diskStorage({
 		destination: (req, res, cb) => {
-			cb(null, "./public/portfolio");
+			cb(null, "./public");
 		},
 		filename: (req, file, cb) => {
 			const ext = path.extname(file.originalname);
@@ -27,7 +27,7 @@ const multerUpload = multer({
 			cb(error, false);
 		}
 	},
-	limits: { fileSize: 2 * 1024 * 1024 },
+	limits: { fileSize: 10 * 1024 * 1024 },
 });
 
 // untuk middleware

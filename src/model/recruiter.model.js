@@ -34,9 +34,9 @@ const recruiterModel = {
 	registerRecruiter: (data) => {
 		return new Promise((resolve, reject) => {
 			db.query(
-				`INSERT INTO recruiter (id_recruiter, names, email, perusahaan, jabatan, phone, password, profile_pic)
+				`INSERT INTO recruiter (id_recruiter, names, email, perusahaan, jabatan, phone, password, profile_pic, levels)
       VALUES
-      ($1, $2, $3, $4, $5, $6, $7, $8)`,
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9)`,
 				[
 					data.id_recruiter,
 					data.names,
@@ -46,6 +46,7 @@ const recruiterModel = {
 					data.phone,
 					data.password,
 					data.profile_pic,
+					data.levels,
 				]
 			)
 				.then((response) => {

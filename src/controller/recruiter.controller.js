@@ -54,6 +54,7 @@ const recruiterController = {
 					phone,
 					password: hash,
 					profile_pic: "avatar.png",
+					levels: 0,
 				};
 
 				recruiterModel.checkEmail(email).then((result) => {

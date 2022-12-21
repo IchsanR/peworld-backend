@@ -106,6 +106,7 @@ const userController = {
 					password: hash,
 					phone,
 					profile_pic: "avatar.png",
+					levels: 1,
 				};
 
 				userModel.checkEmail(email).then((result) => {
@@ -238,6 +239,104 @@ const userController = {
 			})
 			.catch((error) => {
 				failed(res, error.message, "failed", "delete user failed");
+			});
+	},
+
+	// insert portfolio
+	insertPortfolio: (req, res) => {
+		const body = req.body;
+		const data = {
+			iduser: body.iduser,
+			title: body.title,
+			repository: body.repository,
+			portfolio_type: body.portfolio_type,
+			images: req.file ? req.file.filename : null,
+		};
+
+		userModel
+			.insertPortfolio(data)
+			.then((result) => {
+				success(res, result, "success", "insert portfolio user success");
+			})
+			.catch((error) => {
+				failed(res, error.message, "failed", "insert portfolio user failed");
+			});
+	},
+
+	// get portfolio
+	getPortfolio: (req, res) => {
+		const { iduser } = req.params;
+
+		userModel
+			.getPortfolio(iduser)
+			.then((result) => {
+				success(res, result, "success", "get portfolio user success");
+			})
+			.catch((error) => {
+				failed(res, error.message, "failed", "get portfolio user failed");
+			});
+	},
+
+	// delete porto
+	deletePorto: (req, res) => {
+		const { id_portfolio } = req.params;
+
+		userModel
+			.deletePorto(id_portfolio)
+			.then((result) => {
+				success(res, result, "success", "delete portfolio user success");
+			})
+			.catch((error) => {
+				failed(res, error.message, "failed", "delete portfolio user failed");
+			});
+	},
+
+	// insert experience
+	insertExp: (req, res) => {
+		const body = req.body;
+		const data = {
+			iduser: body.iduser,
+			posisi: body.posisi,
+			perusahaan: body.perusahaan,
+			datefrom: body.datefrom,
+			descriptions: body.descriptions,
+		};
+
+		userModel
+			.insertExp(data)
+			.then((result) => {
+				success(res, result, "success", "insert user experience success");
+			})
+			.catch((error) => {
+				failed(res, error.message, "failed", "insert user experience failed");
+			});
+	},
+
+	// get experience
+	getExp: (req, res) => {
+		const { iduser } = req.params;
+
+		userModel
+			.getExperience(iduser)
+			.then((result) => {
+				success(res, result, "success", "get user experience success");
+			})
+			.catch((error) => {
+				failed(res, error.message, "failed", "get user experience failed");
+			});
+	},
+
+	// delete experience
+	deleteExp: (req, res) => {
+		const { id_experience } = req.params;
+
+		userModel
+			.deleteExp(id_experience)
+			.then((result) => {
+				success(res, result, "success", "delete user experience success");
+			})
+			.catch((error) => {
+				failed(res, error.message, "failed", "delete user experience failed");
 			});
 	},
 };

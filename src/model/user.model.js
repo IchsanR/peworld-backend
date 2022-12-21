@@ -64,9 +64,9 @@ const userModel = {
 	registerUser: (data) => {
 		return new Promise((resolve, reject) => {
 			db.query(
-				`INSERT INTO users (id_user, names, email, password, phone, profile_pic)
+				`INSERT INTO users (id_user, names, email, password, phone, profile_pic, levels)
       VALUES
-      ($1, $2, $3, $4, $5, $6)`,
+      ($1, $2, $3, $4, $5, $6, $7)`,
 				[
 					data.id_user,
 					data.names,
@@ -74,6 +74,7 @@ const userModel = {
 					data.password,
 					data.phone,
 					data.profile_pic,
+					data.levels,
 				]
 			)
 				.then((response) => {
@@ -176,6 +177,122 @@ const userModel = {
 				`
       DELETE FROM users WHERE id_user = '${id_user}'
       `
+			)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	},
+
+	// insert portfolio
+	insertPortfolio: (data) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+			INSERT INTO portfolio (iduser, title, repository, portfolio_type, images)
+			VALUES (
+				$1, $2, $3, $4, $5
+			)`,
+				[
+					data.iduser,
+					data.title,
+					data.repository,
+					data.portfolio_type,
+					data.images,
+				]
+			)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	},
+
+	// get portfolio
+	getPortfolio: (iduser) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+			SELECT * FROM portfolio WHERE iduser = '${iduser}'`
+			)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	},
+
+	// delete portfolio
+	deletePorto: (id_portfolio) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+			DELETE FROM portfolio where id_portfolio = ${id_portfolio}`
+			)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	},
+
+	// insert experience
+	insertExp: (data) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+			INSERT INTO experience
+			(iduser, posisi, perusahaan, datefrom, descriptions)
+			VALUES
+			($1, $2, $3, $4, $5)`,
+				[
+					data.iduser,
+					data.posisi,
+					data.perusahaan,
+					data.datefrom,
+					data.descriptions,
+				]
+			)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	},
+
+	// get experience
+	getExperience: (iduser) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+			SELECT * FROM experience WHERE iduser = '${iduser}'`
+			)
+				.then((response) => {
+					resolve(response);
+				})
+				.catch((error) => {
+					reject(error);
+				});
+		});
+	},
+
+	// delete experience
+	deleteExp: (id_experience) => {
+		return new Promise((resolve, reject) => {
+			db.query(
+				`
+			DELETE FROM experience WHERE id_experience = ${id_experience}`
 			)
 				.then((response) => {
 					resolve(response);
