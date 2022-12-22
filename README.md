@@ -1,11 +1,11 @@
-# Peworld (Frontend)
+# Hirejob (Backend)
 
 <!-- Logo -->
 <p align="center">
 
-  <h3 align="center">Peworld</h3>
+  <h3 align="center">Mama Recipe</h3>
   <p align="center">
-    <image align="center" width="100" height="100" src='./public/Logo1.png' />
+    <image align="center" width="200" src='./public/hirejob_logo.png' />
   </p>
 
   <p align="center">
@@ -19,47 +19,56 @@
 
 ## Table of Contents
 
-<details>
-  <summary>Table of Contents</summary>
-  <ol>
-    <li>
-      <a href="#about-the-project">About The Project</a>
-      <ul>
-        <li><a href="#built-with">Built With</a></li>
-      </ul>
-    </li>
-    <li>
-      <a href="#getting-started">Getting Started</a>
-      <ul>
-        <li><a href="#prerequisites">Prerequisites</a></li>
-        <li><a href="#requirements">Requirements</a></li>
-        <li><a href="#installation">Installation</a></li>
-        <li><a href="#setup-env-example">Setup .env example</a></li>
-      </ul>
-    </li>
-    <li><a href="#contributing">Contributing</a></li>
-    <li><a href="#screenshoots">Screenshoots</a></li>
-    <li><a href="#related-project">Related Projects</a></li>
-  </ol>
-</details>
+- [About the Project](#about-the-project)
+  - [Project Structure](#project-structure)
+  - [Built With](#built-with)
+- [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+  - [Setup .env example](#setup-.env-example)
+- [Contributing](#contributing)
+- [Related Project](#related-project)
 
 <!-- About The Project -->
 
 ## About The Project
 
-Peworld is a web application where job seekers and recruiters meet.
-In this application, the you can create an account and upload your portfolio so the recruiters can see and if they are interseted about you, they can hire you.
+Mama recipe is the web application that you can post your delicious recipe. You can create your account and start posting your recipe.
+
+### Project Structure
+
+```
+|── mamarecipe-backend
+   |── public            # Public Assets
+   |── src               # Project source code
+       |── config        # Database configuration
+       |── controller    # Request controller
+       |── helper        # Cloudinary, env, JWT, response configuration
+       |── middleware    # Middleware configuration
+       |── model         # Database query
+       |── router        # API Endpoint routes
+   |── .env              # Environment variables
+   |── .gitignore        # Files that should be ignored
+   |── db.sql            # Database setup
+   |── index.js          # Index file
+   |── README.md         # Readme
+```
 
 ### Built With
 
 This app was built with some technologies below:
 
-- [JavaScript](https://www.javascript.com/)
-- [Node.js](https://nodejs.org/en/)
-- [Express.js](https://expressjs.com/)
-- [PostgreSQL](https://www.postgresql.org//)
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+- [Node JS](https://nodejs.org/en/docs/)
+- [Express JS](https://expressjs.com/)
+- [PostgreSQL](https://www.postgresql.org/)
+- [Cloudinary](https://cloudinary.com/)
+- [Dotenv](https://www.npmjs.com/package/dotenv)
+- [Bcrypt](https://www.npmjs.com/package/bcrypt)
+- [CORS](https://www.npmjs.com/package/cors)
+- [JSONWebToken](https://www.npmjs.com/package/jsonwebtoken)
+- [Multer](https://www.npmjs.com/package/multer)
+- [Nodemon](https://www.npmjs.com/package/nodemon)
+- [Pg](https://www.npmjs.com/package/pg)
 
 <!-- Getting Started -->
 
@@ -70,21 +79,19 @@ This app was built with some technologies below:
 This is an example of how to list things you need to use the software and how to install them.
 
 - [Node.js](https://nodejs.org/en/download/)
-- [Express.js](https://expressjs.com/en/starter/installing.html)
-- [PostgreSQL](https://www.postgresql.org/download/)
 
 ### Installation
 
 - Clone the repository
 
-```
+```sh
 git clone https://github.com/IchsanR/peworld-backend.git
 ```
 
 - Go to repository folder
 
-```
-cd peworld-frontend
+```sh
+cd peworld-backend
 ```
 
 - Install Module
@@ -95,26 +102,20 @@ npm install / npm i
 
 - Connect with database
 - <a href="#setup-env-example">Setup .env</a>
-- Type ` npm run dev` To Start Development
-- Type ` npm run start` To Start Production
-
-<p align="right">(<a href="#top">back to top</a>)</p>
+- Type ` npm start` To Monitoring Backend Activities
 
 ### Setup .env example
 
 Create .env file in your root project folder.
 
 ```env
-# app
-DB_HOSTNAME= [DATABASE_HOSTNAME]
-DB_USERNAME= [DATABASE_USERNAME]
-DB_PASSWORD= [DATABASE_PASSWORD]
-DB_NAME= [DATABASE_NAME]
-DB_PORT= [DATABASE_PORT]
-JWT_SECRET= [YOUR_JWT_SECRET_KEY]
+DB_HOSTNAME=[DATABASE_HOSTNAME]
+DB_USERNAME=[DATABASE_USERNAME]
+DB_PASSWORD=[DATABASE_PASSWORD]
+DB_NAME=[DATABASE_NAME]
+DB_PORT=[DATABASE_PORT]
+JWT_SECRET=[YOUR_JWT_SECRET_KEY]
 ```
-
-<p align="right">(<a href="#top">back to top</a>)</p>
 
 <!-- Contributing -->
 
@@ -128,20 +129,12 @@ Contributions are what make the open source community such an amazing place to b
 4. Push to the Branch (`git push origin your-branch`)
 5. Open a Pull Request
 
-<p align="right">(<a href="#top">back to top</a>)</p>
-
-<!-- Screenshoots -->
-
-## Screenshoots
-
 <!-- Related Projects -->
 
 ## Related Project
 
-:rocket: [`Peworld (Frontend)`](https://github.com/IchsanR/peworld-frontend)
+:rocket: [`Hirejob (Frontend)`](https://github.com/IchsanR/peworld-frontend)
 
-<!-- :rocket: [`Mamarecipe Web Service`](https://dove-chat.herokuapp.com/) -->
-
-<!-- :rocket: [`Mamarecipe App Demo`](https://dove-chat-fe.vercel.app/login) -->
+<!-- :rocket: [`Demo Project`](https://mamarecipe-frontend.vercel.app/) -->
 
 <p align="right">(<a href="#top">back to top</a>)</p>
