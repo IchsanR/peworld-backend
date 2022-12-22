@@ -1,12 +1,9 @@
 const userModel = require("../model/user.model");
-const {
-	success,
-	failed,
-	successWithToken,
-} = require("../helper/file.response");
+const { success, failed } = require("../helper/file.response");
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwtToken = require("../helper/generateJWT");
+const cloudinary = require("../helper/cloudinary");
 
 const userController = {
 	// get all user
@@ -94,10 +91,17 @@ const userController = {
 			const id_user = uuidv4();
 			const { names, email, password, phone } = req.body;
 
-			bcrypt.hash(password, 10, (err, hash) => {
+			bcrypt.hash(password, 10, async (err, hash) => {
 				if (err) {
 					failed(res, err.message, "failed", "fail hash password");
 				}
+				const profile_pic = req.file
+					? await cloudinary.uploader.upload(req.file.path)
+					: {
+							secure_url:
+								"https://res.cloudinary.com/dhm4yjouq/image/upload/v1667923907/cld-sample.jpg",
+							public_id: "",
+					  };
 
 				const data = {
 					id_user: id_user,
@@ -105,7 +109,7 @@ const userController = {
 					email,
 					password: hash,
 					phone,
-					profile_pic: "avatar.png",
+					profile_pic: `${profile_pic.secure_url}|&&|${profile_pic.public_id}`,
 					levels: 1,
 				};
 
@@ -211,13 +215,13 @@ const userController = {
 	},
 
 	// update profile picture
-	updateProfileImage: (req, res) => {
+	updateProfileImage: async (req, res) => {
 		const id_user = req.params.id_user;
-		const profile_pic = req.file.filename;
+		const profile_pic = await cloudinary.uploader.upload(req.file.path);
 
 		const data = {
 			id_user,
-			profile_pic,
+			profile_pic: `${profile_pic.secure_url}|&&|${profile_pic.public_id}`,
 		};
 
 		userModel
@@ -243,14 +247,15 @@ const userController = {
 	},
 
 	// insert portfolio
-	insertPortfolio: (req, res) => {
+	insertPortfolio: async (req, res) => {
 		const body = req.body;
+		const images = await cloudinary.uploader.upload(req.file.path);
 		const data = {
 			iduser: body.iduser,
 			title: body.title,
 			repository: body.repository,
 			portfolio_type: body.portfolio_type,
-			images: req.file ? req.file.filename : null,
+			images: `${images.secure_url}|&&|${images.public_id}`,
 		};
 
 		userModel

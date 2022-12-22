@@ -7,6 +7,7 @@ const {
 const { v4: uuidv4 } = require("uuid");
 const bcrypt = require("bcrypt");
 const jwtToken = require("../helper/generateJWT");
+const cloudinary = require("../helper/cloudinary");
 
 const recruiterController = {
 	// get all user
@@ -40,10 +41,17 @@ const recruiterController = {
 			const id_recruiter = uuidv4();
 			const { names, email, perusahaan, jabatan, phone, password } = req.body;
 
-			bcrypt.hash(password, 10, (err, hash) => {
+			bcrypt.hash(password, 10, async (err, hash) => {
 				if (err) {
 					failed(res, err.message, "failed", "fail hash password");
 				}
+				const profile_pic = req.file
+					? await cloudinary.uploader.upload(req.file.path)
+					: {
+							secure_url:
+								"https://res.cloudinary.com/dhm4yjouq/image/upload/v1667923907/cld-sample.jpg",
+							public_id: "",
+					  };
 
 				const data = {
 					id_recruiter: id_recruiter,
@@ -53,7 +61,7 @@ const recruiterController = {
 					jabatan,
 					phone,
 					password: hash,
-					profile_pic: "avatar.png",
+					profile_pic: `${profile_pic.secure_url}|&&|${profile_pic.public_id}`,
 					levels: 0,
 				};
 
@@ -161,13 +169,13 @@ const recruiterController = {
 	},
 
 	// update profile picture
-	updateProfileImage: (req, res) => {
+	updateProfileImage: async (req, res) => {
 		const id_recruiter = req.params.id_recruiter;
-		const profile_pic = req.file.filename;
+		const profile_pic = await cloudinary.uploader.upload(req.file.path);
 
 		const data = {
 			id_recruiter,
-			profile_pic,
+			profile_pic: `${profile_pic.secure_url}|&&|${profile_pic.public_id}`,
 		};
 
 		recruiterModel
