@@ -33,12 +33,12 @@
 
 ## About The Project
 
-Mama recipe is the web application that you can post your delicious recipe. You can create your account and start posting your recipe.
+Hirejob Backend is an API used for [PeWorld Hirejob Aplication](https://peworld-lake.vercel.app/). This API is used for every function in the Peworld Hirejob application such as login, register, add portfolio, add work experience, delete portfolio, delete work experience, search users and update user profile.
 
 ### Project Structure
 
 ```
-|── mamarecipe-backend
+|── peworld-backend
    |── public            # Public Assets
    |── src               # Project source code
        |── config        # Database configuration
@@ -115,6 +115,9 @@ DB_PASSWORD=[DATABASE_PASSWORD]
 DB_NAME=[DATABASE_NAME]
 DB_PORT=[DATABASE_PORT]
 JWT_SECRET=[YOUR_JWT_SECRET_KEY]
+CLOUD_NAME = [YOUR_CLOUDINARY_CLOUD_NAME]
+API_KEY = [YOUR_CLOUDINARY_API_KEY]
+API_SECRET = [YOUR_CLOUDINARY_API_SECRET]
 ```
 
 <!-- Contributing -->
