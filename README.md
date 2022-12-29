@@ -135,6 +135,6 @@ Contributions are what make the open source community such an amazing place to b
 
 :rocket: [`Hirejob (Frontend)`](https://github.com/IchsanR/peworld-frontend)
 
-<!-- :rocket: [`Demo Project`](https://mamarecipe-frontend.vercel.app/) -->
+:rocket: [`Demo Project`](https://peworld-lake.vercel.app/)
 
 <p align="right">(<a href="#top">back to top</a>)</p>
